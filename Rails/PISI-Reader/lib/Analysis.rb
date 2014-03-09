@@ -7,12 +7,12 @@ compare = ['A.txt']
 
 def grade_file(file_name)
     file = File.open(file_name, "r")
-    text = TextParser.new(file.read)
     file.close()
     grade_text(text)
 end
 
-def grade_text(text)
+def grade_text(textdata)
+    text = TextParser.new(textdata)
     values = {}
     values.default = 0.0
     values["sentiments"] += text.sentiments
