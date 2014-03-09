@@ -3,6 +3,7 @@ class PictureController < ApplicationController
   end
 
   def upload
+    puts params
     render :text=>"A"
   end
 end
