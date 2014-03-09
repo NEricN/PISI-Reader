@@ -1,3 +1,5 @@
+require 'tesseract'
+
 class PictureController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
@@ -25,8 +27,6 @@ class PictureController < ApplicationController
     # @photo.ocr = ocr
     # @photo.save if @photo.valid?
     puts "Photo End <<<<<<<<<<<<<<<<<<<<<"
-
-    require 'tesseract'
 
     e = Tesseract::Engine.new do |e|
         e.language  = :eng
