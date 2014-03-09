@@ -1,3 +1,3 @@
-https://github.com/peterkeen/heroku-buildpack-vendorbinaries.git
+http://github.com/dollar/heroku-buildpack-multi.git
 https://github.com/heroku/heroku-buildpack-ruby.git
 https://github.com/marcolinux/heroku-buildpack-tesseract
