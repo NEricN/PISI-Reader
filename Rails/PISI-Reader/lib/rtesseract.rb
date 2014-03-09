@@ -2,13 +2,13 @@
 require 'pathname'
 require 'tempfile'
 
-require 'rtesseract/errors'
-require 'rtesseract/mixed'
+require 'errors'
+require 'mixed'
 
 # Processors
-require 'processors/rmagick.rb'
-require 'processors/mini_magick.rb'
-require 'processors/quick_magick.rb'
+require 'rmagick.rb'
+require 'mini_magick.rb'
+require 'quick_magick.rb'
 
 # Ruby wrapper for Tesseract OCR
 class Rtesseract
