@@ -9,8 +9,8 @@ gem 'carrierwave'
 
 group :development do
   # Use sqlite3 as the database for Active Record
-  # gem 'sqlite3'
-  gem 'pg'
+  gem 'sqlite3'
+  # gem 'pg'
 end
 
 group :production do
