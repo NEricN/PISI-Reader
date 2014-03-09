@@ -1,4 +1,5 @@
 # require 'rtesseract'
+require 'text_parser'
 
 class PictureController < ApplicationController
 
@@ -26,6 +27,9 @@ class PictureController < ApplicationController
     ocr = image.to_s
     @photo.ocr = ocr
     @photo.save if @photo.valid?
+
+    parser = TextParser.new(@photo.ocr)
+    analysis = parser.analyze()
     # puts "Photo End <<<<<<<<<<<<<<<<<<<<<"
 
     # e = Tesseract::Engine.new do |e|
@@ -34,7 +38,7 @@ class PictureController < ApplicationController
     # end
     
     # render :text => e.text_for(@photo.pic.path)
-    render :text=>"B"
+    render :text=> analysis
   end
 
   def test
