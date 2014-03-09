@@ -12,6 +12,7 @@ class PictureController < ApplicationController
     @photo.save if @photo.valid?
 
     puts "Photo Start >>>>>>>>>>>>>>>>>>>"
+    puts @photo.pic.path
     image = RTesseract.new(@photo.pic.path)
     ocr = image.to_s
     @photo.ocr = ocr
