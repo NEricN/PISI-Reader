@@ -85,7 +85,6 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     rmagick (2.13.2)
-    rtesseract (1.2.1)
     sass (3.3.0)
       rake
     sass-rails (4.0.1)
@@ -132,7 +131,6 @@ DEPENDENCIES
   rails (= 4.0.3)
   rails_12factor
   rmagick
-  rtesseract
   sass-rails (~> 4.0.0)
   sdoc
   sqlite3
