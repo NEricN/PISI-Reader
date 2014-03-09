@@ -2,6 +2,8 @@
 .DS_Store
 Rails/PISI-Reader/public/assets/
 Rails/PISI-Reader/public/assets/*
+Rails/PISI-Reader/public/uploads/*
 
 Android/bin/PISI-Reader.apk
 Android/bin/resources.ap_
+

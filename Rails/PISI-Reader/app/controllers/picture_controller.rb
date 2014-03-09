@@ -12,18 +12,17 @@ class PictureController < ApplicationController
     @photo.save if @photo.valid?
 
     puts @photo.image.current_path
+
     #@photo = Photo.new
     #@photo.pic = params[:uploaded_file] if params[:uploaded_file].present?
     #@photo.save if @photo.valid?
 
-    #puts "Photo Start >>>>>>>>>>>>>>>>>>>"
-    #puts @photo.pic.path
-    #image = RTesseract.new('.'+@photo.pic.path)
-    #puts image
-    #ocr = image.to_s
-    #@photo.ocr = ocr
-    #@photo.save if @photo.valid?
-    #puts "Photo End <<<<<<<<<<<<<<<<<<<<<"
+    puts "Photo Start >>>>>>>>>>>>>>>>>>>"
+    image = RTesseract.new(@photo.image.current_path)
+    ocr = image.to_s
+    @photo.ocr = ocr
+    @photo.save if @photo.valid?
+    puts "Photo End <<<<<<<<<<<<<<<<<<<<<"
 
     # e = Tesseract::Engine.new do |e|
     #     e.language  = :eng
