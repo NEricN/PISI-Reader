@@ -49,7 +49,7 @@ public class UploadToServer extends Activity {
          
         /************* Ruby Rails upload path ****************/
         //TODO
-        upLoadServerUri = "http://pisi-reader.herokuapp.com/test"; //"http://www.androidexample.com/media/UploadToServer.php";
+        upLoadServerUri = "http://192.168.6.135:8080/upload"; //"http://www.androidexample.com/media/UploadToServer.php";
          
         doUpload();
         

@@ -5,14 +5,22 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">PISI-Reader!</string>
     <string name="action_camera">Camera</string>
-	<string name="action_upload">Upload</string>
+    <string name="action_upload">Upload</string>
     <string name="send">Send to server</string>
     <string name="title_activity_upload_to_server">UploadToServer</string>
-    
+
     <!-- main activity guide -->
-	<string name="guide_take_picture">Please take a picture of your book.</string>
-	<string name="guide_upload_book">You can now upload your book.</string>
-	<string name="guide_judge_book">The book you are reading is level</string>
-	<string name="guide_no_level">Book level not found.</string>
-	<string name="guide_upload_failed">Uploading book failed.</string>
+    <string name="guide_take_picture">Please take a picture of your book.</string>
+    <string name="guide_upload_book">Tap the image to CROP it. \n Or, you can UPLOAD your book now.</string>
+    <string name="guide_judge_book">The book you are reading is level</string>
+    <string name="guide_no_level">Book level not found.</string>
+    <string name="guide_upload_failed">Uploading book failed.</string>
+
+    <!-- dialog -->
+    <string name="dialog_title">Choose how you upload a book</string>
+    <string name="dialog_msg">How would you upload your book?</string>
+    <string name="take_picture">Take picture with camera</string>
+    <string name="input_text">Type what you read</string>
+    <string name="title_activity_type_text">TypeTextActivity</string>
+
 </resources>
