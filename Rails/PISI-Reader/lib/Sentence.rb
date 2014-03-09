@@ -58,10 +58,10 @@ class Sentence
 		word.scan(/[aeiouy]{1,2}/).size
 	end
 
-	def nonwords_count() #Bugs
+	def nonwords_count()
 		temp_sentence = String.new(@sentence)
-		temp_sentence.sub!(/[^()"-':\/\\\\.]|/, '')
-		temp_sentence.sub!(/\.\.\./, '.')
+		temp_sentence.gsub!(/[^()"-':\/\\\\.]/, '')
+		temp_sentence.gsub!(/\.\.\./, '.')
 		temp_sentence.size
 	end
 
@@ -69,8 +69,8 @@ class Sentence
 		@sentence.scan(/[!?]/).size > 0
 	end
 
-	def said_ratio_count() #Bugs
-		@sentence.scan(/" said/).size.to_f/@sentence.scan(/"[^"]+"/).size
+	def said_ratio_count()
+		@sentence.scan(/" said|said "/).size.to_f/@sentence.scan(/"[^"]+"/).size
 	end
 
     def length
