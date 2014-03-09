@@ -2,5 +2,12 @@
   This is the Index
 </p>
 
+<% @photos.each do |photo| %>
+  <%= photo.created_at %>
+  <%= photo.pic_file_name %>
+  <%= photo.pic_content_type %>
+  <%= photo.pic_filesize %>
+<% end %>
+
 <% hi="hello there" %>
 <%= hi %>
