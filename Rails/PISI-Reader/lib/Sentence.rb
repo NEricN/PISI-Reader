@@ -4,7 +4,7 @@ class Sentence
 		@words = split_sentence()
 
 		@sentence_length_char = @sentence.size
-		@sentence_length_words = words.length
+		@sentence_length_words = @words.length
 
 		@irreg_ending = ending_punct()
 		@nonwords = nonwords_count()
@@ -22,11 +22,11 @@ class Sentence
 		syllables()
 	end
 
-	def @uniqueness_ratio_find()
+	def uniqueness_ratio_find()
 		@words.uniq.size.to_f/@words.size
 	end
 
-	def @uniqueness_count_find()
+	def uniqueness_count_find()
 		@words.uniq.size
 	end
 
