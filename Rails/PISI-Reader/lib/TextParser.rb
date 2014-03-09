@@ -8,6 +8,10 @@ class TextParser
 			@sentences.push(Sentence.new(sent))
 		end
 
+		proper_nouns_count()
+		proper_nouns_distances_from()
+		proper_nouns_distances()
+
 		analyze()
 	end
 
@@ -21,9 +25,32 @@ class TextParser
 	end
 
 	def proper_nouns_count()
-		@words.uniq.select{ |word|
+		@proper_nouns_size = @proper_nouns.size
+	end
+
+	def proper_nouns_find()	
+		@proper_nouns = @words.uniq.select{ |word|
 			word[/[A-Z][a-z]+/]
-			}.size
+			}
+	end
+
+	def proper_nouns_distance_from()
+		@proper_distances_avg_avg = 0
+		@proper_distances_average = []
+		@proper_nouns.each do |noun|
+			temp_diff = 0
+			identical_nouns = @words.each_index.select{ |word|
+				@words[word] == noun }
+			identical_nouns.each_with_index do |id_noun, i|
+				if i + 1 >= identical_nouns.size
+					break
+				end
+				temp_diff += (identical_nouns[i + 1] - id_noun)
+			end
+			@proper_distances_avg_avg += temp_diff.to_f/identical_nouns.size
+			@proper_distances_average.push(temp_diff.to_f/identical_nouns.size)
+		end
+		@proper_distances_avg_avg = @proper_distances_avg_avg.to_f/@proper_nouns.size
 	end
 
 	def proper_nouns_distances()
