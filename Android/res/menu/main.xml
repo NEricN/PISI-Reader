@@ -1,9 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
-
+          
+    <!-- Camera, take picture for a new book -->
+    <item android:id="@+id/action_camera"
+          android:icon="@android:drawable/ic_menu_camera"
+          android:title="@string/action_camera"
+          android:showAsAction="ifRoom" />
+    
+    <!-- Upload, httpPost to server -->
+    <item android:id="@+id/action_upload"
+        android:icon="@android:drawable/ic_menu_upload"
+          android:title="@string/action_upload"
+          android:showAsAction="ifRoom"
+          android:visible="false" />
+    
 </menu>
