@@ -1,8 +1,17 @@
 class TextController < ApplicationController
 
-	def upload
-		text = params[:uploaded_text].exists? params[:uploaded_text] : "This is a cow. This is a cat."
+	skip_before_filter :verify_authenticity_token
 
-		render :text => grade_text(text)
+	def upload
+		text = params[:uploaded_text]
+
+		puts text
+
+		parser = TextParser.new(text)
+		analysis = parser.analyze()
+
+		puts analysis
+
+		render :text => analysis
 	end
 end
