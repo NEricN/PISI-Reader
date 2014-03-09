@@ -3,3 +3,5 @@
 Rails/PISI-Reader/public/assets/
 Rails/PISI-Reader/public/assets/*
 
+Android/bin/PISI-Reader.apk
+Android/bin/resources.ap_
