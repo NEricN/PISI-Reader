@@ -2,30 +2,11 @@
   This is the Index
 </p>
 
-<!--
 <% @photos.each do |photo| %>
-  <p>
-    Created At:
-    <%= photo.created_at %>
-    File Name:
-    <%= photo.pic_file_name %>
-    Image Type:
-    <%= photo.pic_content_type %>
-    File Size:
-    <%= photo.pic_file_size %>
-    Image:
-    <div style="float:left;">
-      <%= image_tag photo.pic.url %>
-    </div>
-    <p style="width:300px;float:left;margin-left:40px;">
-      <%= photo.ocr %>
-    </p>
-    <p style="width:300px;float:left;margin-left:40px;">
-    </p>
-    <div style="clear:both;"></div>
-  </p>
+  <%= image_tag photo.image.url %>
+  <%= photo.ocr %>
+  <br>
 <% end %>
--->
 
 <% footer="PISI-Reader" %>
 <%= footer %>
