@@ -20,10 +20,6 @@
       <%= photo.ocr %>
     </p>
     <p style="width:300px;float:left;margin-left:40px;">
-      <%= photo.pic.path %>
-      <% image = RTesseract.new(photo.pic.url) %>
-      <% ocr = image.to_s %>
-      <%= ocr %>
     </p>
     <div style="clear:both;"></div>
   </p>
