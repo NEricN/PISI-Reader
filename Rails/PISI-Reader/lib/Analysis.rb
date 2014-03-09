@@ -2,11 +2,7 @@ require './Sentence'
 require './TextParser'
 
 
-#values["proper nouns"] += text.proper_nouns
-#sentence_values["ending forms"] += sentence.ending_forms
-#sentence_values["syllables"] += sentence.syllables
-#sentence_values["irreg ending"] += sentence.irreg_ending
-#
+texts = [['A.txt', 'B.txt', 'C.txt'], ['D.txt', 'E.txt', 'F.txt'],['G.txt', 'H.txt', 'I.txt']]
 
 def average(group)
     values = {}
@@ -56,8 +52,6 @@ def average(group)
     values
 end
 
-
-texts = [['A.txt', 'B.txt', 'C.txt'], ['D.txt', 'E.txt', 'F.txt'],['G.txt', 'H.txt', 'I.txt']]
 groups = []
 (texts).each do |group|
     groups.push(average group)
