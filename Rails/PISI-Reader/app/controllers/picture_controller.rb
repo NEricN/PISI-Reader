@@ -1,3 +1,6 @@
+# require 'rtesseract'
+require 'text_parser'
+
 class PictureController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
@@ -8,17 +11,26 @@ class PictureController < ApplicationController
 
   def upload
     @photo = Photo.new
-    @photo.pic = params[:uploaded_file] if params[:uploaded_file].present?
+    @photo.image = params[:uploaded_file] if params[:uploaded_file].present?
     @photo.save if @photo.valid?
 
-    puts "Photo Start >>>>>>>>>>>>>>>>>>>"
-    puts @photo.pic.path
-    image = RTesseract.new('.'+@photo.pic.path)
-    puts image
+    puts @photo.image.current_path
+
+    #@photo = Photo.new
+    #@photo.pic = params[:uploaded_file] if params[:uploaded_file].present?
+    #@photo.save if @photo.valid?
+
+    # puts "Photo Start >>>>>>>>>>>>>>>>>>>"
+    # puts 'public/'+@photo.image.url[1..@photo.image.url.length-1]
+    # puts @photo.image.url
+    image = RTesseract.new(@photo.image.current_path)
     ocr = image.to_s
     @photo.ocr = ocr
     @photo.save if @photo.valid?
-    puts "Photo End <<<<<<<<<<<<<<<<<<<<<"
+
+    parser = TextParser.new(@photo.ocr)
+    analysis = parser.analyze()
+    # puts "Photo End <<<<<<<<<<<<<<<<<<<<<"
 
     # e = Tesseract::Engine.new do |e|
     #     e.language  = :eng
@@ -26,7 +38,7 @@ class PictureController < ApplicationController
     # end
     
     # render :text => e.text_for(@photo.pic.path)
-    render :text=>"B"
+    render :text=> analysis
   end
 
   def test
