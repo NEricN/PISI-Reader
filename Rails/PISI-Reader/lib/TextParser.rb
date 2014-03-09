@@ -8,9 +8,12 @@ class TextParser
 			@sentences.push(Sentence.new(sent))
 		end
 
+		proper_nouns_find()
 		proper_nouns_count()
 		proper_nouns_distances_from()
 		proper_nouns_distances()
+
+		words_variety_count()
 
 		analyze()
 	end
@@ -34,7 +37,7 @@ class TextParser
 			}
 	end
 
-	def proper_nouns_distance_from()
+	def proper_nouns_distances_from()
 		@proper_distances_avg_avg = 0
 		@proper_distances_average = []
 		@proper_nouns.each do |noun|
@@ -75,6 +78,7 @@ class TextParser
 			end
 		end
 	end
+
     def negativity(sentiment_hash) #Sentiments.new("sentiments.txt").sent_hash
         total = 0
         (@sentences_array).each do |sent|
@@ -85,5 +89,17 @@ class TextParser
             end
         end
         total
+    end
+
+    def test
+    	puts @text
+    	puts @words
+    	puts @sentences[0]
+
+    	puts @words_uniqueness_count
+    	puts @words_uniqueness_ratio
+
+    	puts @proper_nouns
+    	puts @proper_distances_avg_avg
     end
 end
