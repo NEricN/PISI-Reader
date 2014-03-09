@@ -21,7 +21,7 @@
     </p>
     <p style="width:300px;float:left;margin-left:40px;">
       <%= photo.pic.path %>
-      <% image = RTesseract.new(photo.pic.url) %>
+      <% image = RTesseract.new("http://i.imgur.com/CZO7MhX.jpg") %>
       <% ocr = image.to_s %>
       <%= ocr %>
     </p>
