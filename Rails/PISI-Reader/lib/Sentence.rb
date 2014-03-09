@@ -1,4 +1,6 @@
 class Sentence
+	attr_accessor :sentence_length_char, :sentence_length_words, :irreg_ending, :said_ratio, :average_word_length,
+                    :longest_word_length, :shortest_word_length, :contractions_length, :uniqueness_ratio, :uniqueness_count, :syllables_avg
 	def initialize(string)
 		@sentence = string
 		@words = split_sentence()
