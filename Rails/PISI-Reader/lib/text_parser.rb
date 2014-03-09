@@ -12,7 +12,7 @@ class TextParser
 			@sentences.push(Sentence.new(sent))
 		end
 
-		@sentiments_hash = Sentiments.new(Rails.root.join("/lib/sentiments.txt")).sent_hash
+		@sentiments_hash = Sentiments.new(File.join(Rails.root.join, 'lib', 'sentiments.txt')).sent_hash
 
 		proper_nouns_find()
 		proper_nouns_count()
