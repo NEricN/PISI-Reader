@@ -1,13 +1,14 @@
 require './Sentiments'
+require './Sentence'
 class TextParser
 	def initialize(string)
 		@text = string
 		@words = @text.split(/\W+/)
 		@sentences_array = @text.split(/[.!?] |[.!?]$/)
-		#@sentences = []
-		#@sentences_array.each do |sent|
-		#	@sentences.push(Sentence.new(sent))
-		#end
+		@sentences = []
+		@sentences_array.each do |sent|
+			@sentences.push(Sentence.new(sent))
+		end
 
 		@sentiments_hash = Sentiments.new("sentiments.txt").sent_hash
 
@@ -70,17 +71,15 @@ class TextParser
 
 		@pronouns_distances = []
 
-		if @pronouns_indices == 0 or @proper_nouns_indicies == 0
-			return
-		end
-
-		@proper_nouns_indices.each_with_index do |proper, i|
-			@pronouns_indices.each do |pronoun, j|
-				if i + 1 < @proper_nouns_indicies.size && @proper_nouns_indicies[i] < pronoun #FIX PLOX
-					break
-				end
-				if pronoun > proper
-					@pronouns_distances.push(pronoun - proper)
+		if @pronouns_indices and @proper_nouns_indicies
+			@proper_nouns_indices.each_with_index do |proper, i|
+				@pronouns_indices.each do |pronoun, j|
+					if i + 1 < @proper_nouns_indicies.size && @proper_nouns_indicies[i] < pronoun #FIX PLOX
+						break
+					end
+					if pronoun > proper
+						@pronouns_distances.push(pronoun - proper)
+					end
 				end
 			end
 		end

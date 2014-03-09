@@ -8,9 +8,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
+    <TextView android:id="@+id/txt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_centerHorizontal="true" />
+    
+    <ImageView android:id="@+id/img_book"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_below="@id/txt_title" />
+    
+    <Button android:id="@+id/btn_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:text="@string/send"
+        android:layout_alignParentBottom="true" />"
 
 </RelativeLayout>
