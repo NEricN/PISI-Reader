@@ -6,9 +6,9 @@ class PictureController < ApplicationController
   end
 
   def upload
-    @photo = new Photo
-    @photo.pic = params[:uploaded_file] if params[:uploaded_file].present?
-    @photo.save if @photo.valid?
+    @picture = Picture.new
+    @picture.pic = params[:uploaded_file] if params[:uploaded_file].present?
+    @picture.save if @picture.valid?
     render :text=>"A"
   end
 end
