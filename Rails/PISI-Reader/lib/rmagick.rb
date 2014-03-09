@@ -1,6 +1,6 @@
 # encoding: UTF-8
 # Add to rtesseract a image manipulation with RMagick
-module Processors::RMagickProcessor
+module RMagickProcessor
   def self.setup
     require 'RMagick'
   end
