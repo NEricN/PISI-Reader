@@ -1,6 +1,6 @@
 # encoding: UTF-8
 # Add to rtesseract a image manipulation with QuickMagick
-module QuickMagickProcessor
+module Processors::QuickMagickProcessor
   def self.setup
     require 'quick_magick'
   end

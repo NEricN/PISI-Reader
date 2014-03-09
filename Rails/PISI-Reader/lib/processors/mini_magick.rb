@@ -1,6 +1,6 @@
 # encoding: UTF-8
 # Add to rtesseract a image manipulation with MiniMagick
-module MiniMagickProcessor
+module Processors::MiniMagickProcessor
   def self.setup
     require 'mini_magick'
   end
