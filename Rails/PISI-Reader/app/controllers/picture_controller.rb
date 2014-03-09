@@ -16,7 +16,8 @@ class PictureController < ApplicationController
     #@photo.save if @photo.valid?
 
     puts "Photo Start >>>>>>>>>>>>>>>>>>>"
-    image = RTesseract.read(@photo.image.current_path) do |image|
+    image = RTesseract::Mixed.new(@photo.image.current_path) do |image|
+      image.area(0,0,100,100)
     end
     ocr = image.to_s
     puts "OCR: #{ocr} Valid:[#{@photo.valid?}]"
