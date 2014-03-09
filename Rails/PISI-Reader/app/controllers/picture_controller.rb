@@ -11,4 +11,8 @@ class PictureController < ApplicationController
     @picture.save if @picture.valid?
     render :text=>"A"
   end
+
+  def test
+    render :text=>"A"
+  end
 end
