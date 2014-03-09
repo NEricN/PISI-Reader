@@ -75,4 +75,15 @@ class TextParser
 			end
 		end
 	end
+    def negativity(sentiment_hash) #Sentiments.new("sentiments.txt").sent_hash
+        total = 0
+        (@sentences_array).each do |sent|
+            (sent.split(' ')).each do |word|
+                if sentiment_hash.has_key? word
+                    total += sentiment_hash[word]
+                end
+            end
+        end
+        total
+    end
 end
