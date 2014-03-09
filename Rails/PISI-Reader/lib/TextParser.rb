@@ -18,7 +18,7 @@ class TextParser
 		proper_nouns_distances_from()
 		proper_nouns_distances()
 		words_variety_count()
-        puts negativity(@sentiments_hash)
+        @sentiments = negativity(@sentiments_hash)
 		analyze()
 	end
 

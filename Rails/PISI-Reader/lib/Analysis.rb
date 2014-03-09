@@ -1,75 +1,109 @@
 require './Sentence'
 require './TextParser'
+require './MathAnalysis'
 
+texts = [['A.txt', 'B.txt', 'C.txt'], ['D.txt', 'E.txt', 'F.txt'],['G.txt', 'H.txt', 'I.txt'],['Z.txt', 'Z2.txt', 'Z3.txt']]
+compare = ['A.txt']
 
-texts = [['A.txt', 'B.txt', 'C.txt'], ['D.txt', 'E.txt', 'F.txt'],['G.txt', 'H.txt', 'I.txt']]
-
-def average(group)
+def average group
     values = {}
-    values.default = 0.0
-    total = 1.0
-    (group).each do |file|
-        f = File.open(file, "r")
+    values["numbers"] = {}
+        values["numbers"].default = 0.0
+    values["sentences"] = {}
+
+    group.each do |file|
+        f = File.open(file, 'r')
         text = TextParser.new(f.read)
-        values["sentiments"] += text.sentiments
-        values["words uniqueness count"] += text.words_uniqueness_count
-    	values["words uniqueness ratio"] += text.words_uniqueness_ratio
-    	values["proper distances avg avg"] += text.proper_distances_avg_avg
-        sentence_values = {}
-        sentence_values.default = 0.0
-        i = 1.0
-        (text.sentences).each do |sentence|
-            sentence_values["sentence length char"] += sentence.sentence_length_char
-            sentence_values["sentence length words"] += sentence.sentence_length_words
-            sentence_values["said ratio"] += sentence.said_ratio
-            sentence_values["average word length"] += sentence.average_word_length
-            sentence_values["longest word length"] += sentence.longest_word_length
-            sentence_values["shortest word length"] += sentence.shortest_word_length
-            sentence_values["contractions length"] += sentence.contractions_length
-            sentence_values["uniqueness ratio"] += sentence.uniqueness_ratio
-            sentence_values["uniqueness count"] += sentence.uniqueness_count
-            sentence_values["syllables avg"] += sentence.syllables_avg
-            i += 1.0
+
+        text.instance_variables.each do |ivar_name|
+            ivar_value = text.instance_variable_get ivar_name
+
+            if ivar_value.class.name.to_s == "Float" or ivar_value.class.name.to_s == "Fixnum"
+                values["numbers"][ivar_name.to_s] += ivar_value
+            end
         end
-        i -= 1.0
-        values["sentence length char"] += sentence_values["sentence length char"]/i
-        values["sentence length words"] += sentence_values["sentence length words"]/i
-        values["said ratio"] += sentence_values["said ratio"]/i
-        values["average word length"] += sentence_values["average word length"]/i
-        values["longest word length"] += sentence_values["longest word length"]/i
-        values["shortest word length"] += sentence_values["shortest word length"]/i
-        values["contractions length"] += sentence_values["contractions length"]/i
-        values["uniqueness ratio"] += sentence_values["uniqueness ratio"]/i
-        values["uniqueness count"] += sentence_values["uniqueness count"]/i
-        values["syllables avg"] += sentence_values["syllables avg"]/i
-        total += 1.0
+
+        text.sentences.each do |sentence|
+            sentence.instance_variables.each do |ivar_name|
+                ivar_value = sentence.instance_variable_get ivar_name
+                if ivar_value.class.name.to_s == "Float" or ivar_value.class.name.to_s == "Fixnum"
+                    values["sentences"][ivar_name.to_s] = [] unless values["sentences"].has_key? ivar_name.to_s
+                    values["sentences"][ivar_name.to_s].push ivar_value
+                end
+            end
+        end
         f.close
     end
-    total -= 1.0
-    (values.keys).each do |key|
-        values[key] /= total
+
+    values["numbers"].keys.each do |key|
+        values["numbers"][key] /= group.size
     end
+
+    values["sentences"].keys.each do |key|
+        values["sentences"][key] = MathAnalysis.new values["sentences"][key]
+    end
+
     values
 end
 
-groups = []
-(texts).each do |group|
-    groups.push(average group)
-end
-(groups[0].keys).each do |key|
-    line = ""
-    spaces = 25 - key.length
-    line += key
-    line += ":"
-    for i in (0..spaces)
-        line += " "
+def print_groups texts, compare
+    comparison = average compare
+    groups = []
+    texts.each do |group|
+        groups.push(average group)
     end
-    (groups).each do |group|
-        line += group[key].to_s
-        spaces = 20 - group[key].to_s.length
-        for i in (0..spaces)
+
+    groups[0]["numbers"].keys.each do |key|
+        line = ""
+        spaces = 25 - key.length
+        line += key + ":"
+        for i in 0..spaces
             line += " "
         end
+
+        groups.each do |group|
+            line += group["numbers"][key].to_s
+            spaces = 25 - group["numbers"][key].to_s.length
+            for i in 0..spaces
+                line += " "
+            end
+        end
+
+        line += comparison["sentences"][key].to_s
+
+        puts line
+
     end
-    puts line
+
+    groups[0]["sentences"].keys.each do |key|
+        line = ""
+        spaces = 25 - key.length
+        line += key + ":"
+        for i in 0..spaces
+            line += " "
+        end
+
+        groups.each do |group|
+            t_line = ""
+            t_line += group["sentences"][key].average.round(6).to_s + "("
+            t_line += group["sentences"][key].find_std(comparison["sentences"][key].average).round(2).to_s
+            t_line += ")"
+            spaces = 25 - t_line.length
+            line += t_line
+            for i in 0..spaces
+                line += " "
+            end
+        end
+
+        line += comparison["sentences"][key].to_s
+        spaces = 25 - comparison["sentences"][key].to_s.length
+        for i in 0..spaces
+            line += " "
+        end
+
+        puts line
+
+    end
 end
+
+print_groups texts, compare
