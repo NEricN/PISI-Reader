@@ -26,6 +26,8 @@ class PictureController < ApplicationController
     # @photo.save if @photo.valid?
     puts "Photo End <<<<<<<<<<<<<<<<<<<<<"
 
+    require 'tesseract'
+
     e = Tesseract::Engine.new do |e|
         e.language  = :eng
         e.blacklist = '|'
