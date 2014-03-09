@@ -16,10 +16,10 @@ class PictureController < ApplicationController
     #@photo.save if @photo.valid?
 
     puts "Photo Start >>>>>>>>>>>>>>>>>>>"
-    puts 'public/'+@photo.image.url[1..@photo.image.url.length-1]
-    image = RTesseract::Mixed.new(@photo.image.current_path) do |image|
+    image = RTesseract.read(@photo.image.current_path) do |image|
     end
     ocr = image.to_s
+    puts "OCR: #{ocr} Valid:[#{@photo.valid?}]"
     @photo.ocr = ocr
     @photo.save if @photo.valid?
     puts "Photo End <<<<<<<<<<<<<<<<<<<<<"
