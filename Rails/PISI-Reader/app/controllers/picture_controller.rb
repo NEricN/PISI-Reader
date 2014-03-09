@@ -18,7 +18,8 @@ class PictureController < ApplicationController
     #@photo.save if @photo.valid?
 
     puts "Photo Start >>>>>>>>>>>>>>>>>>>"
-    image = RTesseract.new(@photo.image.url)
+    puts 'public/'+@photo.image.url[1..@photo.image.url.length-1]
+    image = RTesseract.new('public/'+@photo.image.url[1..@photo.image.url.length-1])
     ocr = image.to_s
     @photo.ocr = ocr
     @photo.save if @photo.valid?
