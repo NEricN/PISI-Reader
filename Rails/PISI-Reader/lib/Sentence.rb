@@ -16,11 +16,22 @@ class Sentence
 		@shortest_word_length = shortest_word_find()
 
 		@contractions_length = contractions_find()
+
+		@uniqueness_ratio = uniqueness_ratio_find()
+		@uniqueness_count = uniqueness_count_find()
 		syllables()
 	end
 
+	def @uniqueness_ratio_find()
+		@words.uniq.size.to_f/@words.size
+	end
+
+	def @uniqueness_count_find()
+		@words.uniq.size
+	end
+
 	def split_sentence()
-		@sentence.split(/[[, ] ]/)
+		@sentence.split(/\b+/)
 	end
 
 	def syllables()
