@@ -12,6 +12,8 @@
     <%= photo.pic_content_type %>
     File Size:
     <%= photo.pic_file_size %>
+    Image:
+    <%= image_tag photo.pic.url(:medium) %>
   </p>
 <% end %>
 
