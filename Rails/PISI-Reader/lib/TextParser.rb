@@ -1,3 +1,4 @@
+require './Sentiments'
 class TextParser
 	def initialize(string)
 		@text = string
@@ -15,7 +16,7 @@ class TextParser
 		proper_nouns_distances_from()
 		proper_nouns_distances()
 		words_variety_count()
-
+        puts negativity(@sentiments_hash)
 		analyze()
 	end
 
@@ -71,7 +72,7 @@ class TextParser
 
 		@proper_nouns_indices.each_with_index do |proper, i|
 			@pronouns_indices.each do |pronoun, j|
-				if i + 1 < @proper_nouns_indicies.size && @proper_nouns_indicies[i] < pronoun
+				if i + 1 < @proper_nouns_indicies.size && @proper_nouns_indicies[i] < pronoun #FIX PLOX
 					break
 				end
 				if pronoun > proper
