@@ -13,7 +13,13 @@
     File Size:
     <%= photo.pic_file_size %>
     Image:
-    <%= image_tag photo.pic.url(:medium) %>
+    <div style="float:left;">
+      <%= image_tag photo.pic.url(:medium) %>
+    </div>
+    <p style="width:300px;float:left;margin-left:40px;">
+      <%= photo.ocr %>
+    </p>
+    <div style="clear:both;"></div>
   </p>
 <% end %>
 

@@ -7,10 +7,23 @@ class PictureController < ApplicationController
   end
 
   def upload
-    puts params.keys
     @photo = Photo.new
     @photo.pic = params[:uploaded_file] if params[:uploaded_file].present?
     @photo.save if @photo.valid?
+
+    puts "Photo Start >>>>>>>>>>>>>>>>>>>"
+    image = RTesseract.new(@photo.pic.path)
+    ocr = image.to_s
+    @photo.ocr = ocr
+    @photo.save if @photo.valid?
+    puts "Photo End <<<<<<<<<<<<<<<<<<<<<"
+
+    # e = Tesseract::Engine.new do |e|
+    #     e.language  = :eng
+    #     e.blacklist = '|'
+    # end
+    
+    # render :text => e.text_for(@photo.pic.path)
     render :text=>"B"
   end
 
