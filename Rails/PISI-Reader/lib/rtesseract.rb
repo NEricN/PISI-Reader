@@ -11,7 +11,7 @@ require 'processors/mini_magick.rb'
 require 'processors/quick_magick.rb'
 
 # Ruby wrapper for Tesseract OCR
-class RTesseract
+class Rtesseract
   attr_accessor :options
   attr_writer   :lang
   attr_writer   :psm
@@ -29,7 +29,7 @@ class RTesseract
   def initialize(src = '', options = {})
     @options = command_line_options(options)
     @value, @x, @y, @w, @h = ['']
-    @processor = RTesseract.choose_processor!(@processor)
+    @processor = Rtesseract.choose_processor!(@processor)
     @source = @processor.image?(src) ? src : Pathname.new(src)
   end
 
@@ -58,12 +58,12 @@ class RTesseract
   end
 
   def self.read(src = nil, options = {}, &block)
-    fail RTesseract::ImageNotSelectedError if src.nil?
-    processor = RTesseract.choose_processor!(options.delete(:processor) || options.delete('processor'))
+    fail Rtesseract::ImageNotSelectedError if src.nil?
+    processor = Rtesseract.choose_processor!(options.delete(:processor) || options.delete('processor'))
     image = processor.read_with_processor(src.to_s)
 
     yield image
-    object = RTesseract.new('', options)
+    object = Rtesseract.new('', options)
     object.from_blob(image.to_blob)
     object
   end
@@ -92,7 +92,7 @@ class RTesseract
     end
     true
   rescue => error
-    raise RTesseract::TempFilesNotRemovedError.new(:error => error, :files => files)
+    raise Rtesseract::TempFilesNotRemovedError.new(:error => error, :files => files)
   end
 
   # Select the language
@@ -158,7 +158,7 @@ class RTesseract
     @value = File.read(@text_file).to_s
     remove_file([@image, @text_file])
   rescue => error
-    raise RTesseract::ConversionError.new(error)
+    raise Rtesseract::ConversionError.new(error)
   end
 
   # Read image from memory blob
@@ -171,7 +171,7 @@ class RTesseract
     convert
     remove_file([blob_file])
   rescue => error
-    raise RTesseract::ConversionError.new(error)
+    raise Rtesseract::ConversionError.new(error)
   end
 
   # Output value
@@ -181,7 +181,7 @@ class RTesseract
       convert
       @value
     else
-      fail RTesseract::ImageNotSelectedError.new(@source)
+      fail Rtesseract::ImageNotSelectedError.new(@source)
     end
   end
 
