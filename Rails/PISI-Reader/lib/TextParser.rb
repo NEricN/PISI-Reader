@@ -1,6 +1,7 @@
 require './Sentiments'
 require './Sentence'
 class TextParser
+	attr_accessor :sentences, :sentiments, :words_uniqueness_count, :words_uniqueness_ratio, :proper_distances_avg_avg
 	def initialize(string)
 		@text = string
 		@words = @text.split(/\W+/)
