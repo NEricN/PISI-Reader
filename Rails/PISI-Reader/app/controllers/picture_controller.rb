@@ -13,7 +13,7 @@ class PictureController < ApplicationController
 
     puts "Photo Start >>>>>>>>>>>>>>>>>>>"
     puts @photo.pic.path
-    image = RTesseract.new(@photo.pic.path)
+    image = RTesseract.new('.'+@photo.pic.path)
     puts image
     ocr = image.to_s
     @photo.ocr = ocr
