@@ -17,7 +17,7 @@ group :production do
   gem 'pg'
 end
 
-# gem 'rtesseract'
+gem 'rtesseract'
 gem 'rmagick'
 
 # Use Uglifier as compressor for JavaScript assets
