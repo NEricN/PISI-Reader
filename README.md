@@ -8,5 +8,10 @@ Push to Heroku:
 * `git subtree push --prefix Rails/PISI-Reader heroku master`
 
 
+POST to localhost
+=================
+curl -X POST --form "uploaded_file=@/Users/elee/Desktop/2.jpg" http://pisi-reader.herokuapp.com/upload
+
+
 
 

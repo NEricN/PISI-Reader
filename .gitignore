@@ -1,3 +1,5 @@
 *.sw*
 .DS_Store
+Rails/PISI-Reader/public/assets/
+Rails/PISI-Reader/public/assets/*
 

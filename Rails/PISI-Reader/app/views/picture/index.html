@@ -2,6 +2,7 @@
   This is the Index
 </p>
 
+<!--
 <% @photos.each do |photo| %>
   <p>
     Created At:
@@ -14,7 +15,7 @@
     <%= photo.pic_file_size %>
     Image:
     <div style="float:left;">
-      <%= image_tag photo.pic.url(:medium) %>
+      <%= image_tag photo.pic.url %>
     </div>
     <p style="width:300px;float:left;margin-left:40px;">
       <%= photo.ocr %>
@@ -24,6 +25,7 @@
     <div style="clear:both;"></div>
   </p>
 <% end %>
+-->
 
 <% footer="PISI-Reader" %>
 <%= footer %>
