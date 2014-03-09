@@ -1,3 +1,5 @@
+require 'text_parser'
+
 class TextController < ApplicationController
 
 	skip_before_filter :verify_authenticity_token

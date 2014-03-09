@@ -1,5 +1,6 @@
-require './Sentiments'
-require './Sentence'
+require 'sentiment'
+require 'sentence'
+require 'math_analysis'
 class TextParser
 	attr_accessor :sentences, :sentiments, :words_uniqueness_count, :words_uniqueness_ratio, :proper_distances_avg_avg
 	def initialize(string)
@@ -11,7 +12,7 @@ class TextParser
 			@sentences.push(Sentence.new(sent))
 		end
 
-		@sentiments_hash = Sentiments.new("sentiments.txt").sent_hash
+		@sentiments_hash = Sentiments.new(File.join(Rails.root.join, 'lib', 'sentiments.txt')).sent_hash
 
 		proper_nouns_find()
 		proper_nouns_count()
