@@ -1,18 +1,19 @@
 class TextParser
 	def initialize(string)
 		@text = string
-		@words = @text.split(/\b+/)
-		@sentences_array = string.split(/[.!?] /)
-		@sentences = []
-		@sentences_array.each do |sent|
-			@sentences.push(Sentence.new(sent))
-		end
+		@words = @text.split(/\W+/)
+		@sentences_array = @text.split(/[.!?] |[.!?]$/)
+		#@sentences = []
+		#@sentences_array.each do |sent|
+		#	@sentences.push(Sentence.new(sent))
+		#end
+
+		@sentiments_hash = Sentiments.new("sentiments.txt").sent_hash
 
 		proper_nouns_find()
 		proper_nouns_count()
 		proper_nouns_distances_from()
 		proper_nouns_distances()
-
 		words_variety_count()
 
 		analyze()
@@ -33,8 +34,9 @@ class TextParser
 
 	def proper_nouns_find()	
 		@proper_nouns = @words.uniq.select{ |word|
-			word[/[A-Z][a-z]+/]
+			word[/[A-Z][a-z]+/] and @sentiments_hash.has_key? word.downcase
 			}
+
 	end
 
 	def proper_nouns_distances_from()
@@ -81,20 +83,19 @@ class TextParser
 
     def negativity(sentiment_hash) #Sentiments.new("sentiments.txt").sent_hash
         total = 0
-        (@sentences_array).each do |sent|
-            (sent.split(' ')).each do |word|
-                if sentiment_hash.has_key? word
-                    total += sentiment_hash[word]
-                end
-            end
+        @words.each do |word|
+        	if sentiment_hash.has_key? word
+        		total += sentiment_hash[word]
+        	end
         end
         total
     end
 
     def test
-    	puts @text
+    	puts @text + "\n"
     	puts @words
-    	puts @sentences[0]
+
+    	puts @sentences_array[0]
 
     	puts @words_uniqueness_count
     	puts @words_uniqueness_ratio
