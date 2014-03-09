@@ -6,6 +6,7 @@ PISIReader::Application.routes.draw do
   root 'picture#index'
 
   post 'upload' => 'picture#upload'
+  post 'textupload' => 'text#upload'
   post 'test' => 'picture#test'
 
   # Example of regular route:
