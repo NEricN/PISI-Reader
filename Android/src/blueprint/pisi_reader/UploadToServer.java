@@ -5,10 +5,14 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
+
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -16,6 +20,7 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressLint("NewApi")
 public class UploadToServer extends Activity {
     
     TextView messageText;
@@ -127,12 +132,14 @@ public class UploadToServer extends Activity {
                    conn.setRequestMethod("POST");
                    conn.setRequestProperty("Connection", "Keep-Alive");
                    conn.setRequestProperty("Accept-Charset", "UTF-8"); 
+                   conn.setRequestProperty("charset", "UTF-8");
                    conn.setRequestProperty("ENCTYPE", "multipart/form-data");
                    conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
                    conn.setRequestProperty("uploaded_file", fileName); 
                     
                    dos = new DataOutputStream(conn.getOutputStream());
-          
+//                   OutputStreamWriter dos2 = new OutputStreamWriter(dos, UTF8_CHARSET);
+                   
                    dos.writeBytes(twoHyphens + boundary + lineEnd); 
                    dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
                                              + fileName + "\"" + lineEnd);
@@ -160,7 +167,12 @@ public class UploadToServer extends Activity {
                    // send multipart form data necesssary after file data...
                    dos.writeBytes(lineEnd);
                    dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-          
+                   
+//                   OutputStreamWriter osw = new OutputStreamWriter(dos, UTF8_CHARSET);
+//                   
+//                   osw.flush();
+                   
+                   
                    // Responses from the server (code and message)
                    serverResponseCode = conn.getResponseCode();
                    //TODO
@@ -252,5 +264,16 @@ public class UploadToServer extends Activity {
     	}
     		
 	    UploadToServer.this.finish();
+    }
+    
+    private final Charset UTF8_CHARSET = Charset.forName("UTF-8");
+
+    @SuppressLint("NewApi")
+	String decodeUTF8(byte[] bytes) {
+        return new String(bytes, UTF8_CHARSET);
+    }
+
+    byte[] encodeUTF8(String string) {
+        return string.getBytes(UTF8_CHARSET);
     }
 }
