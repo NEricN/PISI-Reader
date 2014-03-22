@@ -68,6 +68,9 @@ public final class R {
         public static final int take_picture=0x7f05000e;
         public static final int title_activity_type_text=0x7f050010;
         public static final int title_activity_upload_to_server=0x7f050006;
+        /**  server 
+         */
+        public static final int upload_addr=0x7f050011;
     }
     public static final class style {
         /** 
